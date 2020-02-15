@@ -1,24 +1,45 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import React, { Component, Fragment } from 'react';
+import { Segment, Container, Header, Icon } from 'semantic-ui-react';
+import NavBar from './navbar/navbar';
 import RecentHistory from './history/history';
 
-import './custom.css'
+import Dashboard from './dashboard/dashboard';
+import { Route } from 'react-router-dom';
+import Home from './home/home';
 
-export default class App extends Component {
-  static displayName = App.name;
+class App extends Component {
+    render() {
+        const headerStyle = {
+            paddingTop: '10px'
+        };
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-            <Route path='/fetch-data' component={FetchData} />
-            <Route path='/history' component={RecentHistory} />
-      </Layout>
-    );
-  }
+        return (
+            <Fragment>
+                <Route exact path='/' component={Home}></Route>
+                <Route
+                    path='/(.+)'
+                    render={() => (
+                        <Container>
+                            <Segment basic>
+                                <Header as='h1' style={headerStyle}>
+                                    <Icon name='settings' />
+                                    <Header.Content>SCB Client Application</Header.Content>
+                                </Header>
+                            </Segment>
+                            <Segment basic>
+                                <NavBar></NavBar>
+                            </Segment>
+
+                            <Segment basic>
+                                <Route path='/dashboard' component={Dashboard}></Route>
+                                <Route path='/history' component={RecentHistory}></Route>
+                            </Segment>
+                        </Container>
+                    )}
+                ></Route>
+            </Fragment>
+        );
+    }
 }
+
+export default App;
