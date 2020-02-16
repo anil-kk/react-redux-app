@@ -1,8 +1,14 @@
-import {combineReducers} from 'redux'
-import regionFilterReducer from './filter/selectedFilterReducer'
+import { combineReducers } from 'redux';
+import regionsReducer from './filter/regionsReducer';
+import gendersReducer from './filter/gendersReducer';
+import yearsReducer from './filter/yearsReducer';
+import dataReducer from './filter/dataReducer';
 
 const rootReducer = combineReducers({
-    filteredRegions: regionFilterReducer
+    filteredRegions: regionsReducer,
+    filteredYears: yearsReducer,
+    filteredGenders: gendersReducer,
+    data: dataReducer
 })
 
 export default rootReducer

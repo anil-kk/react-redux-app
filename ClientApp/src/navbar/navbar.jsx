@@ -26,16 +26,6 @@ class NavBar extends Component {
           <Icon name='table' />
           Dashboard
         </Menu.Item>
-        <Menu.Item
-          as={NavLink}
-          to='/history'
-          name='history'
-          active={activeItem === 'history'}
-          onClick={this.handleMenuItemClick}
-        >
-          <Icon name='history' />
-          History
-        </Menu.Item>
       </Menu>
     );
   }

@@ -8,7 +8,9 @@ const updateRegionFilterItem = (state, payload) =>{
 }
 
 //createReducer(INITIAL_STATE, FUNCTION_MAP)
-export default createReducer(initialStateRegionFilterItems, {
+const regionsReducer = createReducer(initialStateRegionFilterItems, {
     [UPDATE_REGION_FILTER]: updateRegionFilterItem,
 })
+
+export default regionsReducer
 

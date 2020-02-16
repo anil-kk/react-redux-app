@@ -856,7 +856,7 @@ const gender = scbData['variables'].filter(item => {
   return item.code.toLowerCase() === 'kon';
 });
 
-const time = scbData['variables'].filter(item => {
+const year = scbData['variables'].filter(item => {
   return item.code.toLowerCase() === 'tid';
 });
 
@@ -875,9 +875,12 @@ const getTimeOptions = ({ values, valueTexts }) => {
     return { key: value, text: valueTexts[index], value: value };
   });
 };
+
+const yearsToConsider = ["2010", "2011", "2012", "2013", "2014"]
+
 export const regionOptions = getRegionOptions(regions[0]);
 export const genderOptions = getGenderOptions(gender[0]);
-export const timeOptions = getTimeOptions(time[0]);
+export const yearOptions = getTimeOptions(year[0]).filter(y => yearsToConsider.indexOf(y.key) > -1);
 
 export const regionsLookup = scbData['variables']
   .filter(item => {
@@ -889,7 +892,7 @@ export const regionsLookup = scbData['variables']
       lookup[value] = valueTexts[index];
     });
     return lookup;
-  });
+  })[0];
 
 export const genderLookup = scbData['variables']
   .filter(item => {
@@ -901,9 +904,9 @@ export const genderLookup = scbData['variables']
       lookup[value] = valueTexts[index];
     });
     return lookup;
-  });
+  })[0];
 
-export const timeLookup = scbData['variables']
+export const yearLookup = scbData['variables']
   .filter(item => {
     return item.code.toLowerCase() === 'tid';
   })
@@ -913,4 +916,4 @@ export const timeLookup = scbData['variables']
       lookup[value] = valueTexts[index];
     });
     return lookup;
-  });
+  })[0];
