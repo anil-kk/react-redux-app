@@ -113,7 +113,7 @@ class Filter extends Component {
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
-                    <Button onClick={() => this.fetchDataFromScb()}>Fetch</Button>
+                    <Button primary onClick={() => this.fetchDataFromScb()}>Fetch</Button>
                 </Grid.Column>
             </Grid>
         );

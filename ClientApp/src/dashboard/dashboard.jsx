@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Table, Segment } from 'semantic-ui-react';
+import { Table, Segment, Dimmer, Loader, Statistic, Icon } from 'semantic-ui-react';
 import Filter from '../filter/filter';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -45,32 +45,52 @@ class Dashboard extends Component {
                 </Segment>
 
                 <Segment basic style={cssHorizontalOverflow}>
-                    <Table unstackable>
+                    <Table unstackable striped>
                         <Table.Header>
                             <Table.Row>
                                 <Table.HeaderCell>Region</Table.HeaderCell>
                                 <Table.HeaderCell>Gender</Table.HeaderCell>
                                 <Table.HeaderCell>Year</Table.HeaderCell>
-                                <Table.HeaderCell>Count</Table.HeaderCell>
+                                <Table.HeaderCell>Total Births</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
                         <Table.Body>
-
-                            {data.length > 0 ? (
+                            {data.length > 0 && (
                                 data.map(item => {
-
                                     return (<Table.Row key={item.key.join()}>
-                                        <Table.Cell>{regionsLookup[item.key[0]]}</Table.Cell>
-                                        <Table.Cell>{genderLookup[item.key[1]]}</Table.Cell>
-                                        <Table.Cell>{item.key[2]}</Table.Cell>
-                                        <Table.Cell>{item.values[0]}</Table.Cell>
+                                        <Table.Cell>
+                                            <Statistic size='mini'>
+                                                <Statistic.Value>{regionsLookup[item.key[0]]}</Statistic.Value>
+                                            </Statistic>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Statistic size='mini'>
+                                                <Statistic.Value>{genderLookup[item.key[1]] === 'men' ? (<Icon name='male' size='large' />) : (<Icon name='female' size='large' />)}  </Statistic.Value>
+                                            </Statistic>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Statistic size='mini'>
+                                                <Statistic.Value>{item.key[2]}</Statistic.Value>
+                                            </Statistic>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Statistic size='mini'>
+                                                <Statistic.Value>{parseInt(item.values[0], 10).toLocaleString('en-US') }</Statistic.Value>                                                
+                                            </Statistic>
+                                        </Table.Cell>
                                     </Table.Row>);
                                 })
-                            ) : (<Table.Row><Table.Cell>Loading....</Table.Cell></Table.Row>)}
+                            )}
 
                         </Table.Body>
                     </Table>
+
+                    {
+                        data.length === 0 && (<Dimmer active inverted>
+                            <Loader inverted content='Loading' />
+                        </Dimmer>)
+                    }
                 </Segment>
             </Fragment>
         );

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Segment, Container, Header, Icon } from 'semantic-ui-react';
+import { Segment, Container, Header, Icon, Button, Grid } from 'semantic-ui-react';
 import NavBar from './navbar/navbar';
 import RecentHistory from './history/history';
 
@@ -8,6 +8,9 @@ import { Route } from 'react-router-dom';
 import Home from './home/home';
 
 class App extends Component {
+    openGithub() {
+        window.open('https://github.com/anil-kk/react-redux-app', '_blank')
+    }
     render() {
         const headerStyle = {
             paddingTop: '10px'
@@ -21,10 +24,22 @@ class App extends Component {
                     render={() => (
                         <Container>
                             <Segment basic>
-                                <Header as='h1' style={headerStyle}>
-                                    <Icon name='settings' />
-                                    <Header.Content>SCB Client Application</Header.Content>
-                                </Header>
+
+                                <Grid stackable>
+
+                                    <Grid.Column floated='left' width={10}>
+                                        <Header as='h2' style={headerStyle}>
+                                            <Icon name='settings' />
+                                            <Header.Content>React Redux AspNetCore</Header.Content>
+                                        </Header>
+                                    </Grid.Column>
+
+                                    <Grid.Column floated='right' width={6}>
+                                        <Button onClick={() => this.openGithub()}><Icon name='github' /> Github</Button>
+                                    </Grid.Column>
+                                </Grid>
+
+                                
                             </Segment>
                             <Segment basic>
                                 <NavBar></NavBar>
