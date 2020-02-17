@@ -22,7 +22,8 @@ const actions = {
 class Filter extends Component {
     state = {
         regionSearchQuery: '', genderSearchQuery: '', yearSearchQuery: '',
-        regionSelectOptions: regionOptions, genderSelectOptions: genderOptions, yearSelectOptions: yearOptions
+        regionSelectOptions: regionOptions, genderSelectOptions: genderOptions, yearSelectOptions: yearOptions,
+        isButtonDisabled: false
     };
 
     componentDidMount() {
@@ -52,24 +53,32 @@ class Filter extends Component {
     handleYearSearchQuery = (e, { yearSearchQuery }) => {
         this.setState({ yearSearchQuery });
     };
-   
+
 
     fetchDataFromScb() {
+        this.setState({ isButtonDisabled: true });
         axios.post('/scb', {
             regions: this.props.filteredRegions,
             genders: this.props.filteredGenders,
             years: this.props.filteredYears
         })
             .then((response) => {
-                console.log(response.data.data);
-                this.props.updateData(response.data.data)
+                this.props.updateData(response.data.data);
+                this.setState({ isButtonDisabled: false });
             }, (error) => {
                 this.setState({ error, isLoading: false })
             });
     }
 
     render() {
-        const { regionSelectOptions, genderSelectOptions, yearSelectOptions, regionSearchQuery, genderSearchQuery, yearSearchQuery } = this.state;
+        const {
+            regionSelectOptions,
+            genderSelectOptions,
+            yearSelectOptions,
+            regionSearchQuery,
+            genderSearchQuery,
+            yearSearchQuery,
+            isButtonDisabled } = this.state;
 
         return (
             <Grid stackable columns={4}>
@@ -113,7 +122,7 @@ class Filter extends Component {
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
-                    <Button primary onClick={() => this.fetchDataFromScb()}>Fetch</Button>
+                    <Button primary onClick={() => this.fetchDataFromScb()} disabled={isButtonDisabled}>Fetch</Button>
                 </Grid.Column>
             </Grid>
         );
