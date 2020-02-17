@@ -26,15 +26,14 @@ class App extends Component {
                             <Segment basic>
 
                                 <Grid stackable>
-
-                                    <Grid.Column floated='left' width={10}>
+                                    <Grid.Column floated='left' width={14}>
                                         <Header as='h2' style={headerStyle}>
                                             <Icon name='settings' />
                                             <Header.Content>React Redux AspNetCore</Header.Content>
                                         </Header>
                                     </Grid.Column>
 
-                                    <Grid.Column floated='right' width={6}>
+                                    <Grid.Column floated='right' width={2}>
                                         <Button onClick={() => this.openGithub()}><Icon name='github' /> Github</Button>
                                     </Grid.Column>
                                 </Grid>

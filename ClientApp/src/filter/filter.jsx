@@ -57,6 +57,7 @@ class Filter extends Component {
 
     fetchDataFromScb() {
         this.setState({ isButtonDisabled: true });
+        this.props.updateData([]);
         axios.post('/scb', {
             regions: this.props.filteredRegions,
             genders: this.props.filteredGenders,
