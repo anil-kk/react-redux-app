@@ -8,7 +8,7 @@ const updateRegionFilterItem = (state, payload) => {
     if (payload.selectedRegionFilterItems.length === 0) {
         return ['00'];
     }
-    return [...payload.initialStateRegionFilterItems];
+    return [...payload.selectedRegionFilterItems];
 }
 
 //createReducer(INITIAL_STATE, FUNCTION_MAP)
